@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WPFMedinova.Models.Create_Doctor_Model>
+@{
+    ViewData["Title"] = "List_Doctors";
+    Layout = null;
+}
+
+<link href="~/css/bootstrap.min.css" rel="stylesheet">
+
+
+<h1 class="bg-dark text-white text-center">List of Doctors</h1>
+
+<a asp-controller="Account" asp-action="Create_Doctor" class="btn btn-success">Add new Doctor</a>
+<br /><br />
+
+<table class="table table-bordered mt-3 text-center">
+    <tr>
+        <th class="text-center">S.No.</th>
+        <th class="text-center">First Name</th>
+        <th class="text-center">Last Name</th>
+        <th class ="text-center">Age</th>
+        <th class="text-center">Gender</th>
+        <th class="text-center">Mobile No</th>
+        <th class="text-center">Address</th>
+        <th class="text-center">Specialization</th>
+    </tr>
+    @foreach (var emp in Model)
+    {
+        <tr>
+            <td>@emp.D_Id</td>
+            <td>@emp.FirstName</td>
+            <td>@emp.LastName</td>
+            <td>@emp.Age</td>
+            <td>@emp.Gender</td>
+            <td>@emp.MobileNo</td>
+            <td>@emp.Address</td>
+            <td>@emp.Specialization</td>
+        </tr>
+    }
+</table>
+<br />
+<a asp-controller="AuthSecurity" asp-action="Index">Go back</a>

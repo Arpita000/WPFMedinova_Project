@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WPFMedinova.Models.RegisterModel>
+@{
+    ViewData["Title"] = "List_Patients";
+    Layout = null;
+}
+
+<link href="~/css/bootstrap.min.css" rel="stylesheet">
+
+<h1 class ="bg-dark text-white text-center">
+    List of Patients</h1>
+
+<table class="table table-bordered text-center">
+    <tr>
+        <th class="text-center">S. No.</th>
+        <th class="text-center">First Name</th>
+        <th class="text-center">Last Name</th>
+        <th class="text-center">Age</th>
+        <th class="text-center">Gender</th>
+        <th class="text-center">Mobile No</th>
+        <th class="text-center">Address</th>
+        @*@if (ViewBag.role == "Doctor")
+        {
+            <th colspan="2" class="text-center">ACTION</th>
+        }*@
+        @*<th>Role</th>*@
+    </tr>
+    @foreach (var emp in Model)
+    {
+        <tr>
+            <td>@emp.R_Id</td>
+            <td>@emp.FirstName</td>
+            <td>@emp.LastName</td>
+            <td>@emp.Age</td>
+            <td>@emp.Gender</td>
+            <td>@emp.MobileNo</td>
+            <td>@emp.Address</td>
+
+
+
+            @*@if (ViewBag.role == "Doctor")
+            {
+                <td class="text-center"><a asp-controller="#" asp-action="#" class="btn btn-primary">Approve</a></td>
+                <td class="text-center"><a asp-controller="#" asp-action="#" class="btn btn-warning">Pending</a></td>
+            }*@
+
+
+
+            @* <td>@emp.Role</td>*@
+        </tr>
+    }
+</table>
+<br />
+<a asp-controller="AuthSecurity" asp-action="Index">Go back</a><br /><br />
+
+@if (ViewBag.role == "Doctor")
+{
+    <div class="text-center">
+        <a asp-controller="AuthSecurity" asp-action="Appointment_List" class=""><input type="submit" value="Appointment List" class="btn btn-success btn-lg" /></a>
+    </div>
+}
+<br />
+<div class="text-center">
+    <a asp-controller="Account" asp-action="Logout" class=""><input type="submit" value="Logout" class="btn btn-danger btn-lg" /></a>
+</div>

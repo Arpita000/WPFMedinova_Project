@@ -1,0 +1,60 @@
+﻿@model WPFMedinova.Models.RegisterModel
+
+@{
+    ViewData["Title"] = "Patient_Details";
+    Layout = null;
+}
+
+<link href="~/css/bootstrap.min.css" rel="stylesheet">
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Patient Details</title>
+</head>
+<body>
+
+    <div>
+        <h1 class="text-center" style="background-color:black;color:white">Patient Details</h1><br />
+        <div class="text-center">
+            <a asp-controller="Account" asp-action="Appointment" class=""><input type="submit" value="Book an Appointment" class="btn btn-success btn-lg" /></a>
+            <a asp-controller="AuthSecurity" asp-action="Appointment_List" class=""><input type="submit" value="Appointment List" class="btn btn-success btn-lg" /></a>
+        </div>
+        <hr />
+        <table class="table table-bordered mt-3 text-center">
+            <tr>
+                <th class="text-center">Name</th>
+                <td>@Model.FirstName @Model.LastName</td>
+            </tr>
+            @*<tr>
+            <th>Last Name</th>
+            <td>@Model.LastName</td>
+            </tr>*@
+            <tr>
+                <th class="text-center">Age</th>
+                <td>@Model.Age</td>
+            </tr>
+            <tr>
+                <th class="text-center">Gender</th>
+                <td>@Model.Gender</td>
+            </tr>
+            <tr>
+                <th class="text-center">Mobile No</th>
+                <td>@Model.MobileNo</td>
+            </tr>
+            <tr>
+                <th class="text-center">Address</th>
+                <td>@Model.Address</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        @*<a asp-action="Edit" asp-route-id=@Model.R_Id>Edit</a> |*@
+        @*<a asp-controller="AuthSecurity" asp-action="Login">Back to List</a>*@
+    </div>
+    <div class="text-center">
+        <a asp-controller="Account" asp-action="Logout" class=""><input type="submit" value="Logout" class="btn btn-danger btn-lg" /></a>
+    </div>
+</body>
+</html>

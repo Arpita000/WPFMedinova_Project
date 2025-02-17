@@ -1,0 +1,131 @@
+﻿@*@model WPFMedinova.Models.AppointmentModel;*@
+@{
+    Layout = null;
+}
+
+@*<script src="~/js/cascade.js"></script>*@
+
+@Html.Raw(TempData["insert"]);
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Appointment for Patients</title>
+</head>
+<body>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/js/cascade.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <div id="login" class="container border border-primary rounded">
+        <div class="container">
+            <div id="login-row" class="row mt-lg-5 justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" asp-controller="Account" asp-action="Appointment" method="post">
+                            <h3 class="text-center text-info">Appointment Form</h3>
+                            <div class="form-group">
+                                @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                            </div>
+                            <div class="form-group">
+                                <label for="specialization" class="text-info">Specialization</label><br>
+                               @* <select name="specialization" id="specialization">
+                                    <option>---Select---</option>
+                                    <option value="Physician">Physician</option>
+                                    <option value="Eye Sergeon">Eye Sergeon</option>
+                                    <option value="Dentist">Dentist</option>
+                                </select>*@
+
+                                 <select name="specialization" id="specialization">
+                                    <option>---Select---</option>
+                                </select>
+
+                               @* <span asp-validation-for="Specialization" class="text-danger"></span>*@
+                            </div>
+                            <div class="form-group">
+                                <label for="doctor" class="text-info">Select Doctor</label><br>
+                                <select name="doctor">
+                                    <option>---Select---</option>
+                                    <option value="Will Jack">Will Jack</option>
+                                    <option value="Haily Joseph">Haily Joseph</option>
+                                    <option value="Paul Wilson">Paul Wilson</option>
+                                    <option value="Suzanne Holroyd">Suzanne Holroyd</option>
+                                    <option value="John Wick">John Wick</option>
+                                    <option value="Mary Joe">Mary Joe</option>
+                                </select>
+                                @*<span asp-validation-for="Doctor" class="text-danger"></span>*@
+                            </div>
+                           @* <div class="form-group">
+                                <label for="firstname" class="text-info">First Name</label><br>
+                                <input type="text" name="firstname" id="firstname" class="form-control" value="@ViewBag.first_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="text-info">Last Name</label><br>
+                                <input type="text" name="lastname" id="lastname" class="form-control" value="@ViewBag.last_name">
+                            </div>*@
+
+                            <div class="form-group">
+                                <label for="name" class="text-info">Name</label><br>
+                                <input type="text" name="Patient_Name" id="name" class="form-control" value="@ViewBag.name" readonly="readonly">
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="mobileno" class="text-info">Mobile No</label><br>
+                                <input type="text" name="mobileno" id="mobileno" class="form-control" value="@ViewBag.mobile_no" readonly="readonly">
+                            </div>
+                            <div class="form-group">
+                                <label for="appointment_date" class="text-info">Appointment Date</label><br>
+                                <input type="date" name="appointment_date" id="appointment_date" class="form-control">
+                                @*<span asp-validation-for="Appointment_Date" class="text-danger"></span>*@
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="Submit" class="btn btn-info btn-md" value="Book an Appointment" />
+                            </div>
+                        </form>
+                        <div>
+                            <a asp-action="Login">Go back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+    }
+
+<script type="text/javascript">
+//$(document).ready(function () {
+//    alert("1");
+//    GetSpecialization();
+//});
+
+function GetSpecialization() {
+    debugger;
+    alert("2");
+    $.ajax({
+        url: '/Specialization/GetSpecialization',
+        success: function (result) {
+            $.each(result, function (i,data) {
+                $('#specialization').append('
+<option value=' + data.id + '>' + data.name + '</option>');
+            });
+        },
+        error: function (ex) {
+            alert('Failed to retrieve specialization!!'+ex);
+        }
+    });
+}
+</script>
+
+    <script>
+    GetSpecialization();
+    </script>

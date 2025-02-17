@@ -1,0 +1,75 @@
+﻿@model IEnumerable<WPFMedinova.Models.AppointmentModel>
+
+@{
+    Layout = null;
+}
+
+<link href="~/css/bootstrap.min.css" rel="stylesheet">
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Appointment_List</title>
+</head>
+<body>
+
+    <h1 class="bg-dark text-white text-center">Appointment List</h1>
+
+    @*    <p><a asp-action="Create">Create New</a></p>
+    *@
+    <table class="table table-bordered mt-3 text-center">
+        <thead>
+            <tr>
+                <th class="text-center">@Html.DisplayNameFor(model => model.Id)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.Patient_Name)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.Specialization)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.Doctor)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.Appointment_Date)</th>
+                @if (ViewBag.role == "Doctor")
+                {
+                    <th colspan="2" class="text-center">ACTION</th>
+                }
+                @*<th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Patient_Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Specialization)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Doctor)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Appointment_Date)</td>
+                    @if (ViewBag.role == "Doctor")
+                    {
+                        <td class="text-center"><a asp-controller="AuthSecurity" asp-action="Approve" asp-route-id="@item.Id" class="btn btn-primary">Approve</a></td>
+                        <td class="text-center"><a asp-controller="AuthSecurity" asp-action="Reject" asp-route-id="@item.Id" class="btn btn-warning">Reject</a></td>
+                    }
+                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (ViewBag.role == "Admin")
+    {
+        <a asp-controller="AuthSecurity" asp-action="Index">Go back</a>
+    }
+    else if (ViewBag.role == "Doctor")
+    {
+        <a asp-controller="AuthSecurity" asp-action="List_Patients">Go back</a>
+    }
+    else
+    {
+        <a asp-controller="AuthSecurity" asp-action="Patient_Details">Go back</a>
+    }
+
+    <br />
+    <a asp-controller="AuthSecurity" asp-action="Approved_List" class="btn btn-primary">Approved List</a>
+
+</body>
+</html>
